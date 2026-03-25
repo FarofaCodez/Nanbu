@@ -1,0 +1,27 @@
+html, body {
+	font-family: sans-serif;
+}
+#game {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: skyblue;
+}
+#buy-page {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	display: none;
+	padding: 12px;
+}
+#inventory {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 12px;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Nanbu Project</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<canvas id="game" width="640" height="480"></canvas>
+	<script src="engine.js"></script>
+	<script src="util.js"></script>
+	<script src="items.js"></script>
+
+	<div id="inventory">
+		<p>Inventory</p>
+		<div id="inventory-items">
+			<p>No items</p>
+		</div>
+	</div>
+
+	<div id="buy-page">
+		<p>Buy something</p>
+		<button onclick='buy(testItem, 100)'>Test Item</button>
+		<p id="buyMessage"></p>
+	</div>
+
+	<script src="game.js"></script>
+</body>
+</html>
