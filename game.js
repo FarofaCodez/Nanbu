@@ -1,13 +1,17 @@
 let lastTime = 0;
 const villagerPosition = new Vector2D(200, 200);
 
-function villagerInteraction() {
-	/** @type {HTMLDivElement} */
-	const buyPage = document.querySelector("#buy-page");
-	if (buyPage.style.display === "none") {
-		buyPage.style.display = "block";
+function characterBillboard(position, character, interactionText = "") {
+	if (interactionText !== "") {
+		ctx.font = "bold 16px sans-serif";
+		ctx.fillStyle = "black";
+		ctx.fillText(character, position.x, position.y - 26);
+		ctx.font = "14px sans-serif";
+		ctx.fillText(`[E] ${interactionText}`, position.x, position.y - 10);
 	} else {
-		buyPage.style.display = "none";
+		ctx.font = "bold 16px sans-serif";
+		ctx.fillStyle = "black";
+		ctx.fillText(character, position.x, position.y - 10);
 	}
 }
 
@@ -22,26 +26,10 @@ function update(timestamp) {
 	player.pos.y += (movement.y * player.speed * deltaTime);
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	const villagerOffset = offset(villagerPosition);
-
-	ctx.fillStyle = "green";
-	ctx.fillRect(villagerOffset.x, villagerOffset.y, 60, 60);
-
-	if (euclideanDistance(player.pos, villagerPosition) < 150) {
-		ctx.font = "bold 16px sans-serif";
-		ctx.fillStyle = "black";
-		ctx.fillText("Villager", villagerOffset.x, villagerOffset.y - 26);
-		ctx.font = "14px sans-serif";
-		ctx.fillText("[E] Interact", villagerOffset.x, villagerOffset.y - 10);
-		currentInteraction = villagerInteraction;
-	} else {
-		const buyPage = document.querySelector("#buy-page");
-		buyPage.style.display = "none";
-		if (previousInteraction === "villager") {
-			currentInteraction = () => {};
-		}
+	for (let i = 0; i < objects.length; i++) {
+		objects[i].draw();
 	}
-
+	
 	ctx.fillStyle = player.color;
 	ctx.fillRect(center.x, center.y, player.width, player.height);
 

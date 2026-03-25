@@ -32,6 +32,9 @@ addEventListener("keydown", (event) => {
 	} if (event.key == "ArrowRight" || event.key == "d") {
 		movement.x = 1;
 	}
+	if (event.key == "e") {
+		currentInteraction();
+	}
 });
 addEventListener("keyup", (event) => {
 	if (event.key == "ArrowUp" || event.key == "ArrowDown" || event.key == "w" || event.key == "s") {
