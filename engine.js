@@ -56,8 +56,15 @@ class Item {
 	use() {}
 	/** @type {HTMLImageElement} */
 	texture;
+	/** @type {string} */
+	name;
+	/** @type {boolean} */
+	stackable = false;
 
 	constructor(name) {
 		this.name = name;
 	}
 }
+
+currentInteraction = () => {};
+let previousInteraction = "";

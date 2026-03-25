@@ -1,8 +1,5 @@
 let lastTime = 0;
 const villagerPosition = new Vector2D(200, 200);
-currentInteraction = () => {};
-let previousInteraction = "villager";
-document.querySelector("#inventory").style.display = "none";
 
 function villagerInteraction() {
 	/** @type {HTMLDivElement} */

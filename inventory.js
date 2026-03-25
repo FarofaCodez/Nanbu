@@ -35,3 +35,5 @@ addEventListener("keydown", (event) => {
 		}
 	}
 });
+
+document.querySelector("#inventory").style.display = "none";

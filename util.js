@@ -1,5 +1,3 @@
-// More game-specific functions
-
 function euclideanDistance(p1, p2) {
 	return Math.hypot(
 		p2.x - p1.x,
@@ -15,7 +13,7 @@ function offset(position) {
 function buy(item, price) {
 	const buyMessage = document.querySelector("#buyMessage");
 	if (player.money >= price) {
-		if (player.inventory.includes(item)) {
+		if (player.inventory.includes(item) && !item.stackable) {
 			buyMessage.innerHTML = "You already have this item";
 		} else {
 			player.inventory.push(item);
