@@ -15,7 +15,8 @@ let player = {
 	"height": 65,
 	"speed": 0.3,
 	"inventory": [],
-	"money": 100
+	"money": 100,
+	"color": "blue"
 };
 let movement = new Vector2D(0, 0);
 let canvasCenter = new Vector2D(canvas.width / 2, canvas.height / 2);

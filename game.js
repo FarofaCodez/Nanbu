@@ -45,7 +45,7 @@ function update(timestamp) {
 		}
 	}
 
-	ctx.fillStyle = "red";
+	ctx.fillStyle = player.color;
 	ctx.fillRect(center.x, center.y, player.width, player.height);
 
 	ctx.fillStyle = "black";
@@ -55,35 +55,3 @@ function update(timestamp) {
 	requestAnimationFrame(update);
 }
 requestAnimationFrame(update);
-
-function useItem(i) {
-	const item = player.inventory[i];
-	item.use();
-	player.inventory.splice(i, 1);
-	populateInventory();
-} 
-
-function populateInventory() {
-	const inventoryItems = document.querySelector("#inventory-items");
-	inventoryItems.innerHTML = "";
-	for (let i = 0; i < player.inventory.length; i++) {
-		const inventoryItem = document.createElement("div");
-		inventoryItem.innerHTML = `<p><button onclick='useItem(${i})'>Use</button> ${player.inventory[i].name}</p>`;
-		inventoryItems.appendChild(inventoryItem);
-	}
-}
-
-addEventListener("keydown", (event) => {
-	if (event.key == "e") {
-		currentInteraction();
-	}
-	if (event.key == "i") {
-		const inventory = document.querySelector("#inventory");
-		if (inventory.style.display === "none") {
-			inventory.style.display = "block";
-			populateInventory();
-		} else {
-			inventory.style.display = "none";
-		}
-	}
-})
