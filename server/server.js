@@ -20,23 +20,6 @@ class Character {
 
 	interact() {}
 	deinteract() {}
-
-	draw() {
-		ctx.fillStyle = this.color;
-		const _offset = offset(this.pos);
-		ctx.fillRect(_offset.x, _offset.y, this.width, this.height);
-
-		if (euclideanDistance(player.pos, this.pos) < 150) {
-			characterBillboard(_offset, this.name, this.interactionText);
-			currentInteraction = this.interact;
-			previousInteraction = this.uniqueId;
-		} else {
-			if (previousInteraction === this.uniqueId) {
-				this.deinteract();
-				currentInteraction = () => {};
-			}
-		}
-	}
 }
 
 let clients = [];
