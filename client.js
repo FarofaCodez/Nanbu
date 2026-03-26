@@ -1,22 +1,20 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
-const mode = urlSearchParams.get("mode");
+const playerName = prompt("What is your name?");
 
 const wss = new WebSocket("ws://localhost:8080");
 wss.onopen = () => {
 	const joinMessage = JSON.stringify({
 		type: "join",
-		name: "Player " + Math.floor(Math.random() * 100),
+		name: playerName,
 		x: 0,
 		y: 0,
 		width: 65,
 		height: 65,
 		color: "red"
 	});
-	console.log(joinMessage);
 	wss.send(joinMessage);
 	wss.onmessage = (event) => {
 		const message = JSON.parse(event.data);
-		console.log(message);
 		if (message.type == "yourId") {
 			player.uniqueId = message.uniqueId;
 		}
@@ -40,9 +38,24 @@ wss.onopen = () => {
 				}
 			}
 		}
+		if (message.type == "chat") {
+			const chatMessage = document.querySelector("#chat");
+			chatMessage.innerText = `` + `${message.message}\n` + chatMessage.innerText;
+		}
 	};
 };
 
 setInterval(() => {
 	wss.send(JSON.stringify({ type: "move", x: player.pos.x, y: player.pos.y }));
 }, 1000 / 60);
+
+function chat(message) {
+	wss.send(JSON.stringify({ type: "chat", message: message }));
+}
+
+addEventListener("keydown", (event) => {
+	if (event.key == "t") {
+		const message = prompt("Enter chat message");
+		chat(message);
+	}
+});

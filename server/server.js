@@ -51,13 +51,15 @@ wss.on("connection", (ws) => {
 					client.send(JSON.stringify({ type: "leave", uniqueId: message.uniqueId }));
 				}
 			})
+			clients = clients.filter((client) => client.uniqueId != message.uniqueId);
 			return;
 		}
 		if (message.type == "join") {
 			const uniqueId = crypto.randomUUID();
 			ws.uniqueId = uniqueId;
 			ws.send(JSON.stringify({ type: "yourId", uniqueId: uniqueId }));
-			const playerName = "Player " + Math.floor(Math.random() * 100);
+			const playerName = message.name;
+			ws.name = playerName;
 			wss.clients.forEach((client) => {
 				if (client.readyState === websocket.OPEN) {
 					client.send(JSON.stringify({ type: "join", player: new Character(playerName, 0, 0, 65, 65, "red", "", uniqueId) }));
@@ -76,6 +78,17 @@ wss.on("connection", (ws) => {
 				}
 			});
 		}
+		if (message.type == "chat") {
+			if (message.message.length < 128) {
+				wss.clients.forEach((client) => {
+					if (client.readyState === websocket.OPEN) {
+						client.send(JSON.stringify({ type: "chat", message: `${ws.name}: ${message.message}` }));
+					}
+				});
+			} else {
+				ws.send(JSON.stringify({ type: "chat", message: "Message too long" }));
+			}
+		}
 	});
 	ws.on("close", () => {
 		wss.clients.forEach((client) => {
@@ -83,5 +96,6 @@ wss.on("connection", (ws) => {
 				client.send(JSON.stringify({ type: "leave", uniqueId: ws.uniqueId }));
 			}
 		})
+		clients = clients.filter((client) => client.uniqueId != ws.uniqueId);
 	});
 });

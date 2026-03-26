@@ -26,3 +26,13 @@ html, body {
 	padding: 12px;
 	display: none;
 }
+#chat {
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+	background-color: white;
+	padding: 12px;
+	height: 100px;
+	width: 300px;
+	overflow: scroll;
+}
