@@ -1,14 +1,14 @@
 let objects = [];
 
 class Character {
-	constructor(name, x, y, width, height, color, interactionText = "") {
+	constructor(name, x, y, width, height, color, interactionText = "", uniqueId = crypto.randomUUID()) {
 		this.pos = new Vector2D(x, y);
 		this.width = width;
 		this.height = height;
 		this.color = color;
 		this.name = name;
-		this.uniqueId = crypto.randomUUID();
 		this.interactionText = interactionText;
+		this.uniqueId = uniqueId;
 	}
 
 	interact() {}
@@ -31,25 +31,6 @@ class Character {
 		}
 	}
 }
-const merchant = new Character("Merchant", 200, 200, 60, 60, "green", "Shop");
-let merchantShown = false;
-merchant.interact = () => {
-	/** @type {HTMLDivElement} */
-	const buyPage = document.querySelector("#buy-page");
-	merchantShown = !merchantShown;
-	if (merchantShown) {
-		buyPage.style.display = "block";
-	} else {
-		buyPage.style.display = "none";
-	}
-};
-merchant.deinteract = () => {
-	/** @type {HTMLDivElement} */
-	const buyPage = document.querySelector("#buy-page");
-	merchantShown = false;
-	buyPage.style.display = "none";
-};
-objects.push(merchant);
 
 const shopItems = [];
 const testItem = new Item("Test Item");

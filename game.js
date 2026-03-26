@@ -27,7 +27,9 @@ function update(timestamp) {
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	for (let i = 0; i < objects.length; i++) {
-		objects[i].draw();
+		if (objects[i].uniqueId !== player.uniqueId) {
+			objects[i].draw();
+		}
 	}
 	
 	ctx.fillStyle = player.color;
