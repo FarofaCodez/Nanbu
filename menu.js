@@ -2,6 +2,7 @@ const loadingMessage = document.querySelector("#loadingMessage");
 const menu = document.querySelector("#menu");
 
 let mobile = false;
+let bypassCache = false;
 
 const modules = ["types.js", "util.js", "objects.js", "inventory.js", "engine.js", "game.js"];
 
@@ -10,7 +11,10 @@ async function load() {
 		await new Promise((resolve, reject) => {
 			const element = document.createElement("script");
 
-			element.src = module + "?v=" + Date.now();
+			element.src = module;
+			if (bypassCache) {
+				element.src += `?v=${Date.now()}`;
+			}
 			element.onload = resolve;
 			element.onerror = reject;
 			element.defer = true;
