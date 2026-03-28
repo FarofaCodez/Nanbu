@@ -10,9 +10,22 @@ html, body {
 }
 .menu {
 	position: absolute;
+	background-color: white;
+	padding: 12px;
+}
+.center {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background-color: white;
-	padding: 12px;
+}
+#chat {
+	bottom: 8px;
+	left: 8px;
+	transform: translate(0px, 0px);
+	max-height: 200px;
+	max-width: 400px;
+	overflow-y: scroll;
+	background-color: transparent;
+	background-color: #0000007f;
+	color: white
 }

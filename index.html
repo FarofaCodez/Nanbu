@@ -9,20 +9,20 @@
 </head>
 <body>
 	<canvas id="game" width="640" height="480"></canvas>
-	<div id="inventory" class="menu" style="display: none;">
+	<div id="inventory" class="menu center" style="display: none;">
 		<p>Inventory</p>
 		<div id="inventory-items">
 			<p>No items</p>
 		</div>
 	</div>
 
-	<div id="buy-page" class="menu" style="display: none;">
+	<div id="buy-page" class="menu center" style="display: none;">
 		<p>Buy something</p>
 		<div id="buy-items"></div>
 		<p id="buyMessage"></p>
 	</div>
 
-	<div id="menu" class="menu">
+	<div id="menu" class="menu center">
 		<h1>Nanbu</h1>
 		<button onclick="play()">Play</button>
 		<br><br>
@@ -30,5 +30,7 @@
 		<p id="loadingMessage"></p>
 		<script src="menu.js"></script>
 	</div>
+
+	<pre id="chat" class="menu" id="chat"></pre>
 </body>
 </html>

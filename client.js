@@ -1,7 +1,8 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
-const playerName = prompt("What is your name?");
+const server = prompt("Enter a server to connect to");
+const playerName = prompt("Enter an username");
 
-const wss = new WebSocket("ws://localhost:8080");
+const wss = new WebSocket(server);
 wss.onopen = () => {
 	const joinMessage = JSON.stringify({
 		type: "join",
