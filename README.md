@@ -1,2 +1,2 @@
 # Nanbu
-Game engine and an example game made with it
+A web-based survival game I'm working on
