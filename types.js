@@ -1,0 +1,52 @@
+class Vector2D {
+	constructor(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+class Item {
+	use() {}
+	/** @type {HTMLImageElement} */
+	texture;
+	/** @type {string} */
+	name;
+	/** @type {boolean} */
+	stackable = false;
+
+	constructor(name) {
+		this.name = name;
+	}
+}
+
+class Character {
+	constructor(name, x, y, width, height, color, interactionText = "", uniqueId = crypto.randomUUID()) {
+		this.pos = new Vector2D(x, y);
+		this.width = width;
+		this.height = height;
+		this.color = color;
+		this.name = name;
+		this.interactionText = interactionText;
+		this.uniqueId = uniqueId;
+	}
+
+	interact() {}
+	deinteract() {}
+
+	draw() {
+		ctx.fillStyle = this.color;
+		const _offset = offset(this.pos);
+		ctx.fillRect(_offset.x, _offset.y, this.width, this.height);
+
+		if (euclideanDistance(player.pos, this.pos) < 150) {
+			characterBillboard(_offset, this.name, this.interactionText);
+			currentInteraction = this.interact;
+			previousInteraction = this.uniqueId;
+		} else {
+			if (previousInteraction === this.uniqueId) {
+				this.deinteract();
+				currentInteraction = () => {};
+			}
+		}
+	}
+}

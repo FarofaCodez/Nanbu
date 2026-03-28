@@ -2,12 +2,6 @@
 const canvas = document.querySelector("#game");
 /** @type {CanvasRenderingContext2D} */
 const ctx = canvas.getContext("2d");
-class Vector2D {
-	constructor(x, y) {
-		this.x = x;
-		this.y = y;
-	}
-}
 
 let player = {
 	pos: new Vector2D(0, 0),
@@ -54,20 +48,6 @@ function resize() {
 }
 addEventListener("resize", resize);
 resize();
-
-class Item {
-	use() {}
-	/** @type {HTMLImageElement} */
-	texture;
-	/** @type {string} */
-	name;
-	/** @type {boolean} */
-	stackable = false;
-
-	constructor(name) {
-		this.name = name;
-	}
-}
 
 currentInteraction = () => {};
 let previousInteraction = "";

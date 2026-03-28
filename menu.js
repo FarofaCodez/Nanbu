@@ -3,13 +3,21 @@ const menu = document.querySelector("#menu");
 
 let mobile = false;
 
-const modules = ["engine.js", "util.js", "objects.js", "inventory.js", "game.js"];
+const modules = ["types.js", "util.js", "objects.js", "inventory.js", "engine.js", "game.js"];
+
 async function load() {
-	modules.forEach(async (module) => {
-		const element = document.createElement("script");
-		element.src = module;
-		document.body.appendChild(element);
-	});
+	for (const module of modules) {
+		await new Promise((resolve, reject) => {
+			const element = document.createElement("script");
+
+			element.src = module + "?v=" + Date.now();
+			element.onload = resolve;
+			element.onerror = reject;
+			element.defer = true;
+
+			document.body.appendChild(element);
+		});
+	}
 }
 async function play() {
 	if (mobile) {
