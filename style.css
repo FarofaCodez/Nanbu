@@ -8,31 +8,11 @@ html, body {
 	transform: translate(-50%, -50%);
 	background-color: skyblue;
 }
-#buy-page {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: white;
-	display: none;
-	padding: 12px;
-}
-#inventory {
+.menu {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: white;
 	padding: 12px;
-	display: none;
-}
-#chat {
-	position: absolute;
-	bottom: 8px;
-	left: 8px;
-	background-color: white;
-	padding: 12px;
-	height: 100px;
-	width: 300px;
-	overflow: scroll;
 }
