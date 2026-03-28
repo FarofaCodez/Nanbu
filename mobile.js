@@ -1,0 +1,15 @@
+const mobileControls = document.querySelector("#mobile");
+mobileControls.style.display = "block";
+mobileControls.addEventListener("contextmenu", (event) => event.preventDefault());
+const mobileUp = document.querySelector("#mobileUp");
+const mobileDown = document.querySelector("#mobileDown");
+const mobileLeft = document.querySelector("#mobileLeft");
+const mobileRight = document.querySelector("#mobileRight");
+mobileUp.addEventListener("touchstart", () => movement.y = -1);
+mobileUp.addEventListener("touchend", () => movement.y = 0);
+mobileDown.addEventListener("touchstart", () => movement.y = 1);
+mobileDown.addEventListener("touchend", () => movement.y = 0);
+mobileLeft.addEventListener("touchstart", () => movement.x = -1);
+mobileLeft.addEventListener("touchend", () => movement.x = 0);
+mobileRight.addEventListener("touchstart", () => movement.x = 1);
+mobileRight.addEventListener("touchend", () => movement.x = 0);

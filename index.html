@@ -27,10 +27,20 @@
 		<button onclick="play()">Play</button>
 		<br><br>
 		<button onclick="multiplayer()">Play Multiplayer</button>
+		<br><br>
+		<input type="checkbox" name="isMobile" id="isMobile">
+		<label for="isMobile">Mobile?</label>
 		<p id="loadingMessage"></p>
 		<script src="menu.js"></script>
 	</div>
 
 	<pre id="chat" class="menu" id="chat" style="display: none;"></pre>
+
+	<div class="menu" id="mobile" style="display: none;">
+		<button id="mobileUp" class="mobileButton">Up</button>
+		<button id="mobileDown" class="mobileButton">Down</button>
+		<button id="mobileLeft" class="mobileButton">Left</button>
+		<button id="mobileRight" class="mobileButton">Right</button>
+	</div>
 </body>
 </html>

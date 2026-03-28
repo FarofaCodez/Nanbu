@@ -1,3 +1,8 @@
+const loadingMessage = document.querySelector("#loadingMessage");
+const menu = document.querySelector("#menu");
+
+let mobile = false;
+
 const modules = ["engine.js", "util.js", "objects.js", "inventory.js", "game.js"];
 async function load() {
 	modules.forEach(async (module) => {
@@ -7,11 +12,26 @@ async function load() {
 	});
 }
 async function play() {
-	document.querySelector("#loadingMessage").innerHTML = "Loading...";
+	if (mobile) {
+		modules.push("mobile.js");
+	}
+	loadingMessage.innerText = "Loading...";
 	await load();
-	document.querySelector("#menu").remove();
+	menu.remove();
 }
 async function multiplayer() {
 	modules.push("client.js");
 	await play();
 }
+
+/** @type {HTMLInputElement} */
+const mobileToggle = document.querySelector("#isMobile");
+mobileToggle.addEventListener("change", () => {
+	if (mobileToggle.checked) {
+		mobile = true;
+		loadingMessage.innerText = "Tablet recommended but not required";
+	} else {
+		mobile = false;
+		loadingMessage.innerText = "";
+	}
+});

@@ -29,3 +29,17 @@ html, body {
 	background-color: #0000007f;
 	color: white
 }
+#menu {
+	width: 200px;
+	height: 250px;
+}
+.mobileButton {
+	padding: 20px;
+}
+#mobile {
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
+	transform: translate(0px, 0px);
+	user-select: none;
+}
