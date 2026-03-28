@@ -2,8 +2,18 @@ const urlSearchParams = new URLSearchParams(window.location.search);
 const server = prompt("Enter a server to connect to");
 const playerName = prompt("Enter an username");
 
+document.querySelector("#chat").style.display = "block";
+
+const connectingDiv = document.createElement("div");
+connectingDiv.className = "menu center";
+const connectingMessage = document.createElement("h1");
+connectingMessage.innerText = "Waiting for server";
+connectingDiv.appendChild(connectingMessage);
+document.body.appendChild(connectingDiv);
+
 const wss = new WebSocket(server);
 wss.onopen = () => {
+	connectingMessage.innerText = "Requesting character";
 	const joinMessage = JSON.stringify({
 		type: "join",
 		name: playerName,
@@ -14,13 +24,18 @@ wss.onopen = () => {
 		color: "red"
 	});
 	wss.send(joinMessage);
+	connectingMessage.innerText = "Waiting for character";
 	wss.onmessage = (event) => {
 		const message = JSON.parse(event.data);
+		console.log(message);
 		if (message.type == "yourId") {
 			player.uniqueId = message.uniqueId;
 		}
 		if (message.type == "join") {
-			if (message.uniqueId != player.uniqueId) {
+			if (message.player.uniqueId == player.uniqueId) {
+				connectingDiv.style.display = "none";
+				connectingMessage.innerText = "";
+			} else {
 				objects.push(new Character(message.player.name, message.player.pos.x, message.player.pos.y, message.player.width, message.player.height, message.player.color, message.player.interactionText, message.player.uniqueId));
 			}
 		}
@@ -44,11 +59,18 @@ wss.onopen = () => {
 			chatMessage.innerText = `` + `${message.message}\n` + chatMessage.innerText;
 		}
 	};
-};
 
-setInterval(() => {
-	wss.send(JSON.stringify({ type: "move", x: player.pos.x, y: player.pos.y }));
-}, 1000 / 60);
+	setInterval(() => {
+		wss.send(JSON.stringify({ type: "move", x: player.pos.x, y: player.pos.y }));
+	}, 400);
+};
+wss.onclose = () => {
+	connectingDiv.style.display = "block";
+	connectingMessage.innerText = "Connection lost";
+	setInterval(() => {
+		location.reload();
+	}, 3000);
+}
 
 function chat(message) {
 	wss.send(JSON.stringify({ type: "chat", message: message }));
